@@ -1,0 +1,215 @@
+body {
+    background-color: var(--background-color);
+    color: rgb(49, 75, 92);
+    font-family: Arial, sans-serif, Helvetica, sans-serif;
+    margin: center;
+    text-align: center;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    color: rgb(49, 75, 92);
+    font-size: 40px;
+    /* background-color: rgb(191, 231, 236); */
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+
+h2 {
+    color: rgb(49, 75, 92);
+    font-size: 20px;
+}
+
+h3 {
+    color: rgb(49, 75, 92);
+    font-size: 14px;
+}
+
+p {
+    font-size: 16px;
+}
+
+
+:root {
+    --primary-color: #D8F2DC;
+    /* Set your primary color */
+    --secondary-color: #D6D9C1;
+    /* Set your secondary color */
+    --background-color: #f2f2f2;
+    /* Set your background color */
+    --cell-color: #c1d9d1;
+    --border-color: #D6D9C1;
+    /* Set your border color */
+    --hover-color: #8C8B77;
+    /* Set your hover color */
+    --flagged-color: #ffcccc;
+    /* Set your flagged cell color */
+    --mine-color: #ff9999;
+    /* Set your revealed mine color */
+}
+
+
+.restart {
+    background-color: rgb(135, 170, 179);
+    min-width: 50px;
+    min-height: 50px;
+    margin: 5px auto;
+
+    text-align: center;
+    font-size: 30px;
+    border-radius: 7px;
+    box-shadow: 0 0 2px rgba(183, 220, 247, 0.89);
+    border: none;
+}
+
+.level-container {
+    margin: auto;
+    background-color: var(--primary-color);
+    padding: 20px;
+}
+
+button {
+    background-color: var(--cell-color);
+
+    min-width: 130px;
+    min-height: 30px;
+    margin: 10px auto;
+
+    text-align: center;
+    border-radius: 25px;
+    border: none;
+}
+
+button:hover {
+    background-color: var(--hover-color);
+    ;
+    transition: 0.4s;
+}
+
+.selected {
+    background-color: rgb(100, 168, 185);
+    box-shadow: 0 0 5px rgba(50, 68, 107, 0.719);
+}
+
+.container {
+    display: block;
+    max-width: 600px;
+    height: 800px;
+    margin: 20px auto;
+    background-color: var(--background-color);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px #bcccb6;
+    border: none;
+    justify-content: center;
+    align-items: center;
+}
+
+table {
+    margin: 20px auto;
+}
+
+
+.cell {
+    width: 30px;
+    height:30px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: var(--cell-color);
+    align-items: center;
+}
+
+.cell:hover {
+    background-color: var(--hover-color);
+    ;
+    transition: 0.4s;
+}
+
+td.mine {
+    background-color: rgb(223, 149, 149);
+    width: 20px;
+    height: auto;
+}
+
+.cell-number {
+    background-color: rgb(74, 102, 126);
+}
+
+td.flagged {
+    background-color: var(--flagged-color);
+    width: 20px;
+    height: auto;
+}
+
+.game-board {
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 0 10px rgba(62, 108, 129, 0.445);
+
+    display: grid;
+    gap: 2px;
+    grid-template-columns: repeat(4, 30px);
+    background-color: #ddd;
+}
+
+
+/* td {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+    background-color:var(--cell-color);
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 2px;
+} */
+
+td:hover {
+    background-color: var(--hover-color);
+}
+
+img {
+    max-width: 30px;
+    max-height: 30px;
+}
+
+.timer {
+    background-color: var(--primary-color);
+    padding: 5px;
+    margin: 5px auto;
+    width: 200px;
+    height: 60px;
+    border-radius: 8px;
+}
+
+.minesleft {
+    background-color: var(--primary-color);
+    padding: 5px;
+    margin: 5px auto;
+    width: 200px;
+    height: 60px;
+    border-radius: 8px;
+}
+
+.footer {
+    background-color: #aae2e2;
+
+}
+
+.life-container {
+    background-color: var(--primary-color);
+    padding: 5px;
+    margin: 5px auto;
+    width: 200px;
+    height: 30px;
+    border-radius: 8px;
+}
+
+img {
+    max-height: 30px;
+}

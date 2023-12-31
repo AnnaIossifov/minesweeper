@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>MineSweeper</title>
+</head>
+
+<body onload="onInit()">
+    <h1 class="custom-font">MineSweeper</h1>
+
+    <div class="level-container">
+        <h3>game Level:</h3>
+        <button onclick="chooseLevel('beginner')">Beginner</button>
+        <button onclick="chooseLevel('intermediate')">Intermediate</button>
+        <button onclick="chooseLevel('expert')">Expert</button>
+    </div>
+
+    <button class="restart" onclick="onInit()">😉</button>
+
+
+
+    <div class="container">
+        <div class="timer">
+            <h3>Timer:</h3>
+            <p><span class="minutes">00</span>:<span class="seconds">00</span></p>
+        </div>
+        <div class="minesleft">
+            <h3>Mines:</h3>
+            <p><span class="mines-left">00</span></p>
+        </div>
+        
+        <div class="life-container">
+            <img src="img/life.png" alt="heart01" class="life-1">
+            <img src="img/life.png" alt="heart02" class="life-2">
+            <img src="img/life.png" alt="heart03" class="life-3">
+        </div>
+
+        <div>
+            <table class="center">
+                <tbody class="game-board"></tbody>
+                
+            </table>
+        </div>
+
+    </div>
+
+
+    <div class="winner"></div>
+
+
+
+    <div class="footer">
+        by Anna Iossifov
+    </div>
+
+    <script src="js\game.js"></script>
+    <script src="js\mines.js"></script>
+    <script src="js\util.js"></script>
+</body>
+
+</html>
