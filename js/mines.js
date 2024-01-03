@@ -4,18 +4,30 @@ function chooseLevel(level) {
   console.log('choose level:')
   switch (level) {
     case 'beginner':
-      gLevel = { SIZE: 4, MINES: 2 };
+      gLevel = { 
+        SIZE: 4, 
+        MINES: 2 
+      };
       break;
     case 'intermediate':
-      gLevel = { SIZE: 8, MINES: 14 };
+      gLevel = {
+        SIZE: 8, 
+        MINES: 14 
+      };
       break;
     case 'expert':
-      gLevel = { SIZE: 12, MINES: 32 };
+      gLevel = { 
+        SIZE: 12, 
+        MINES: 32 
+      };
       break;
     default:
       break;
   }
+  // LEVEL = gLevel.SIZE
+  gBoard = buildBoard()
   resetGame()
+  renderBoard(gBoard)
 }
 
 function setMines(board) {
@@ -31,9 +43,10 @@ function setMines(board) {
       board[randI][randJ].isMine = true;
       minesPlaced++;
     }
-    console.log('number of mines:', minesPlaced)
-    console.log('Mine placed at:', randI, randJ)
+    // console.log('number of mines:', minesPlaced)
   }
+  document.querySelector('.minesleft span').innerText = minesPlaced
+  console.log('total mines:', minesPlaced)
 }
 
 function updateNeighborCounts(x, y) {
@@ -55,8 +68,10 @@ function isValidCell(x, y) {
 
 function revealCell(x, y) {
   if (!isValidCell(x, y) || board[x][y].isOpen || gameOver) {
+   console.log('invalid cell');
     return;
   }
+
 
   board[x][y].isOpen = true;
 

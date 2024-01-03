@@ -6,14 +6,14 @@ const MINE = '💣'
 const EMPTY = ''
 
 var minesAroundCount
-var LEVEL = 4
+var LEVEL 
 
 var gameOver = false
 var TIMER
 var LIFE
-var gMineCount
+// var gMineCount
 
-var gIntervalId 
+var gIntervalId
 var gStartTime
 
 // This is an object in which you can keep and update the current game state:
@@ -29,11 +29,19 @@ var gGame = {
 }
 
 function onInit() {
-    // chooseLevel()
-    // setMinesNegsCount(board);
+    gGame.isOn = true  // Reset game state
+    // gGame.shownCount = 0
+    // gGame.markedCount = 0
+    // gGame.secsPassed = 0
+    // stopTimer()
+    // resetTimer()
+
+    // Other initialization code...
     const gBoard = buildBoard()
     renderBoard(gBoard)
-    console.log('Reset complete. Board re-rendered.')
+    placeMines()
+    setMinesNegsCount()
+    console.log('Board is ready.')
 }
 
 function getRandomCoordinate() {
@@ -58,15 +66,15 @@ function setMinesNegsCount(board) {
 
 function countMinesAround(board, row, col) {
     var count = 0;
-    for (var i = 0; i <= row + 1; i++) {
-        for (var j = 0; j <= col + 1; j++) {
-            if (i >= 0 && i < gLevel.SIZE && j >= 0 && j < gLevel.SIZE && board[i][j].isMine) {
-                count++;
+
+    for (var i = Math.max(0, row - 1); i <= Math.min(row + 1, gLevel.SIZE - 1); i++) {
+        for (var j = Math.max(0, col - 1); j <= Math.min(col + 1, gLevel.SIZE - 1); j++) {
+            if (i !== row || j !== col) {
+                if (board[i][j].isMine) {
+                    count++;
+                }
             }
         }
     }
     return count;
 }
-
-
-

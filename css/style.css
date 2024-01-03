@@ -25,11 +25,13 @@ h2 {
 
 h3 {
     color: rgb(49, 75, 92);
-    font-size: 14px;
+    font-size: 12px;
+    margin: 3px auto;
 }
 
 p {
-    font-size: 16px;
+    font-size: 14px;
+    margin: 5px auto;
 }
 
 :root {
@@ -38,27 +40,31 @@ p {
     --background-color: #f2f2f2;
     --cell-color: #c1d9d1;
     --border-color: #D6D9C1;
-    --hover-color: #8C8B77;
-    --flagged-color: #ffcccc;
-    --mine-color: #ff9999;
+    --hover-color: #aec4bc;
+    --flagged-color: #bedfce;
+    --mine-color: #ffd699;
 }
 
 .restart {
     background-color: var(--cell-color);
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     margin: 10px auto;
     text-align: center;
-    font-size: 30px;
+    font-size: 20px;
     border-radius: 7px;
     box-shadow: 0 0 2px rgba(80, 90, 97, 0.816);
     border: none;
 }
 
 .level-container {
-    margin: auto;
-    background-color: var(--primary-color);
-    padding: 20px;
+    margin:20px auto;
+    background-color: var(--background-color);
+    box-shadow: 0 0 5px rgba(80, 90, 97, 0.516);
+    border-radius: 8px;
+    padding: 10px;
+    align-items: center;
+    display: flex;
 }
 
 button:not(.restart) {
@@ -69,7 +75,7 @@ button:not(.restart) {
     margin: 10px auto;
 
     text-align: center;
-    border-radius: 25px;
+    border-radius: 8px;
     border: none;
 }
 
@@ -86,13 +92,17 @@ table {
 
 td {
     background-color: var(--cell-color);
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     border: 1px solid var(--hover-color);
     border-radius: 2px;
 }
 
 .game-board {
+    height:350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 20px auto;
     background-color: var(--background-color);
     padding: 10px;
@@ -102,14 +112,14 @@ td {
 
 .game-board button {
     /*specific styles for Minesweeper buttons */
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     border: 1px solid var(--hover-color);
     text-align: center;
     vertical-align: middle;
 }
 
-.game-board button:hover {
+.game-board td:hover {
     /* specific hover effect for Minesweeper buttons */
     background-color: var(--hover-color);
     transition: 0.4s;
@@ -117,8 +127,8 @@ td {
 
 .game-board td {
     background-color: var(--cell-color);
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     /* border: 1px solid var(--hover-color); */
     border-radius: 5px;
     border: none;
@@ -135,52 +145,71 @@ button {
     box-shadow: 0 0 10px rgba(62, 108, 129, 0.445);
 }
 
-.shown-cell {
-    background-color: #c2f7eb;
+td.shown-cell {
+    background-color: var(--border-color);
 }
 
-.cell.isShown.isMine {
-    background-color: red;
+td.cell-isShown-isMine {
+    background-color: var(--mine-color);
     color: white;
 }
 
-.cell.isFlagged {
-    font-weight: bold;
-    color: #5c0000;
+td.cell-isFlagged {
+    background: var(--flagged-color);
+}
+
+
+.container {
+    background-color: var(--background-color);
+    box-shadow: 0 0 5px rgba(80, 90, 97, 0.507);
+    border-radius: 8px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
 }
 
 .timer {
-    background-color: var(--primary-color);
-    padding: 5px;
-    margin: 5px auto;
-    width: 200px;
-    height: 60px;
+    background-color: var(--background-color);
+    box-shadow: 0 0 5px rgba(80, 90, 97, 0.507);
+    padding-bottom: 3px;
+    padding: 3px;
+    margin: auto;
+    width: 100px;
+    height: 50px;
     border-radius: 8px;
+    text-align: center;
 }
 
 .minesleft {
-    background-color: var(--primary-color);
-    padding: 5px;
-    margin: 5px auto;
-    width: 200px;
-    height: 60px;
+    background-color: var(--background-color);
+    box-shadow: 0 0 5px rgba(80, 90, 97, 0.507);
+    padding-bottom: 3px;
+    padding: 3px;
+    margin: 15px auto;
+    width: 100px;
+    height: 50px;
     border-radius: 8px;
+    text-align: center;
 }
 
-.footer {
-    background-color: #aae2e2;
-
-}
-
-.life-container {
-    background-color: var(--primary-color);
-    padding: 5px;
-    margin: 5px auto;
-    width: 200px;
-    height: 30px;
+.life {
+    background-color: var(--background-color);
+    box-shadow: 0 0 5px rgba(80, 90, 97, 0.507);
+    margin: 15px auto;
+    padding: 3px;
+    width: 100px;
+    height: 50px;
     border-radius: 8px;
+    text-align: center;
 }
 
 img {
-    max-width: 30px;
+    max-width: 15px;
+    max-height: 15px;
+}
+
+.footer {
+    background-color: var(--secondary-color);
+    text-align: center;
+    padding: 10px;
 }
