@@ -88,7 +88,7 @@ function onCellClicked(elCell, i, j, event) {
             gameOver();
         } else if (cell.minesAroundCount === 0) {
             console.log('Expanding shown cells');
-            expandShown(gBoard, elCell, i, j);
+            expandShown(gBoard, i, j);
         }
     }
 
@@ -175,110 +175,22 @@ function onCellMarked(elCell, i, j, event) {
     checkGameOver()
 }
 
-// function expandShown(board, i, j) {
-//     console.log('expandShown triggered');
-//     console.log('Current cell coordinates:', i, j)
-
-//     if (!isValidCell(i, j) || board[i][j].isMine || board[i][j].isShown) {
-//         console.log('Not expanding due to invalid conditions')
-//         return;
-//     }
-
-//     board[i][j].isShown = true;
-//     gGame.shownCount++;
-//     renderCell(i, j);
-//     console.log('Cell expanded:', i, j)
-
-//     if (board[i][j].minesAroundCount === 0) {
-//         console.log('Expanding around cell:', i, j)
-//         // Check and expand neighbors
-//         for (var row = i - 1; row <= i + 1; row++) {
-//             for (var col = j - 1; col <= j + 1; col++) {
-//                 console.log('Expanding to neighbor:', row, col)
-//                 expandShown(board, row, col);
-//             }
-//         }
-//     }
-
-//     if (board[i][j].isMine) {
-//         console.log('Game over! You hit a mine!');
-//         gameOver();
-//     }
-// }
-
 function expandShown(board, i, j) {
-    console.log('expandShown triggered');
-    console.log('Current cell coordinates:', i, j);
-
-    // Checking if the cell at (i, j) exists
-    if (!board[i] || !board[i][j] || board[i][j].isMine || board[i][j].isShown) {
+    if (!board[i] || !board[i][j] || board[i][j].isMine || board[i][j].visited) {
         return;
     }
 
     board[i][j].isShown = true;
-    gGame.shownCount++;
-    renderCell(i, j);
+    board[i][j].visited = true;
 
     if (board[i][j].minesAroundCount === 0) {
-        console.log('Expanding around cell:', i, j);
-        // Checking and expand neighbors
         for (var row = i - 1; row <= i + 1; row++) {
             for (var col = j - 1; col <= j + 1; col++) {
-                expandShown(board, row, col); // Pass coordinates instead of elCell
-            }
-        }
-    }
-
-    if (board[i][j].isMine) {
-        console.log('Game over! You hit a mine!');
-        gameOver();
-    }
-}
-
-
-function expandShown(board, i, j) {
-    console.log('expandShown triggered');
-    console.log('Current cell coordinates:', i, j);
-
-    // Checking if the cell at (i, j) exists
-    if (!board[i] || !board[i][j]) {
-        console.error('Cell does not exist or is out of bounds:', i, j);
-        return;
-    }
-
-    if (board[i][j].isMine) {
-        console.error('Cell is a mine:', i, j);
-        return;
-    }
-
-    if (board[i][j].isShown) {
-        console.error('Cell is already shown:', i, j);
-        return;
-    }
-
-    board[i][j].isShown = true;
-    gGame.shownCount++;
-    console.log('Cell expanded:', i, j);
-
-    if (board[i][j].minesAroundCount === 0) {
-        console.log('Expanding around cell:', i, j);
-
-        // Checking and expanding neighbors
-        for (var row = i - 1; row <= i + 1; row++) {
-            for (var col = j - 1; col <= j + 1; col++) {
-                console.log('Expanding to neighbor:', row, col);
                 expandShown(board, row, col);
             }
         }
     }
-
-    if (board[i][j].isMine) {
-        console.log('Game over! You hit a mine!');
-        gameOver();
-    }
 }
-
-
 
 function isValidCell(x, y) {
     return x >= 0 && x < gLevel.SIZE && y >= 0 && y < gLevel.SIZE;
@@ -355,9 +267,12 @@ function resetGame() {
     gGame.shownCount = 0
     gGame.markedCount = 0
     gGame.secsPassed = 0
+    gGame.life = 3
+
     stopTimer()
     resetTimer()
-
+    renderLife()
+    
     // Update the level and rebuild the board
     gBoard = buildBoard();
     setMines(gBoard);

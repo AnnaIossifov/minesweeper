@@ -6,7 +6,7 @@ const MINE = '💣'
 const EMPTY = ''
 
 var minesAroundCount
-var LEVEL 
+var LEVEL
 
 var gameOver = false
 var TIMER
@@ -15,6 +15,7 @@ var LIFE
 
 var gIntervalId
 var gStartTime
+var gFirstClick = true
 
 // This is an object in which you can keep and update the current game state:
 // isOn: Boolean, when true we let the user play 
@@ -25,7 +26,8 @@ var gGame = {
     isOn: true,
     shownCount: 0,
     markedCount: 0,
-    secsPassed: 0
+    secsPassed: 0,
+    life: 3
 }
 
 function onInit() {
@@ -77,4 +79,15 @@ function countMinesAround(board, row, col) {
         }
     }
     return count;
+}
+
+function renderLife() {
+    for (var i = 1; i <= 3; i++) {
+        var heart = document.querySelector('.life-' + i);
+        if (i <= gGame.life) {
+            heart.style.display = 'inline-block';
+        } else {
+            heart.style.display = 'none';
+        }
+    }
 }
