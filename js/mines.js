@@ -1,7 +1,7 @@
 'use strict'
 
 function chooseLevel(level) {
-  console.log('chose level:')
+  console.log('choose level:')
   switch (level) {
     case 'beginner':
       gLevel = { SIZE: 4, MINES: 2 };
@@ -15,8 +15,7 @@ function chooseLevel(level) {
     default:
       break;
   }
-
-  resetGame();
+  resetGame()
 }
 
 function setMines(board) {
@@ -32,6 +31,8 @@ function setMines(board) {
       board[randI][randJ].isMine = true;
       minesPlaced++;
     }
+    console.log('number of mines:', minesPlaced)
+    console.log('Mine placed at:', randI, randJ)
   }
 }
 
@@ -92,4 +93,35 @@ function flagCell(x, y) {
 
   board[x][y].isFlagged = !board[x][y].isFlagged;
   renderBoard();
+}
+
+function updateTimer() {
+  var elMinutes = document.querySelector('.minutes');
+  var elSeconds = document.querySelector('.seconds');
+  pad(elSeconds);
+  pad(elMinutes);
+
+  gStartTime = Date.now();
+
+  gIntervalId = setInterval(() => {
+      var elapsed = Math.floor((Date.now() - gStartTime) / 1000);
+      var minutes = Math.floor(elapsed / 60);
+      var seconds = elapsed % 60;
+
+      elMinutes.innerText = minutes;
+      elSeconds.innerText = seconds;
+  }, 1000);
+}
+
+function stopTimer() {
+  clearInterval(gIntervalId)
+}
+
+function resetTimer() {
+  gStartTime = null;
+  stopTimer();
+  var elMinutes = document.querySelector('.minutes');
+  var elSeconds = document.querySelector('.seconds');
+  elMinutes.innerText = '00';
+  elSeconds.innerText = '00';
 }

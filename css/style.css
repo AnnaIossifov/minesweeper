@@ -7,6 +7,7 @@ body {
     /* display: flex; */
     justify-content: center;
     align-items: center;
+    font-size: 14px;
 }
 
 h1 {
@@ -31,36 +32,26 @@ p {
     font-size: 16px;
 }
 
-
 :root {
     --primary-color: #D8F2DC;
-    /* Set your primary color */
     --secondary-color: #D6D9C1;
-    /* Set your secondary color */
     --background-color: #f2f2f2;
-    /* Set your background color */
     --cell-color: #c1d9d1;
     --border-color: #D6D9C1;
-    /* Set your border color */
     --hover-color: #8C8B77;
-    /* Set your hover color */
     --flagged-color: #ffcccc;
-    /* Set your flagged cell color */
     --mine-color: #ff9999;
-    /* Set your revealed mine color */
 }
 
-
 .restart {
-    background-color: rgb(135, 170, 179);
-    min-width: 50px;
-    min-height: 50px;
-    margin: 5px auto;
-
+    background-color: var(--cell-color);
+    width: 50px;
+    height: 50px;
+    margin: 10px auto;
     text-align: center;
     font-size: 30px;
     border-radius: 7px;
-    box-shadow: 0 0 2px rgba(183, 220, 247, 0.89);
+    box-shadow: 0 0 2px rgba(80, 90, 97, 0.816);
     border: none;
 }
 
@@ -70,7 +61,7 @@ p {
     padding: 20px;
 }
 
-button {
+button:not(.restart) {
     background-color: var(--cell-color);
 
     min-width: 130px;
@@ -88,94 +79,74 @@ button:hover {
     transition: 0.4s;
 }
 
-.selected {
-    background-color: rgb(100, 168, 185);
-    box-shadow: 0 0 5px rgba(50, 68, 107, 0.719);
-}
-
-.container {
-    display: block;
-    max-width: 600px;
-    height: 800px;
-    margin: 20px auto;
-    background-color: var(--background-color);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px #bcccb6;
-    border: none;
-    justify-content: center;
-    align-items: center;
-}
-
 table {
     margin: 20px auto;
+    grid: 30px;
 }
 
-
-.cell {
-    width: 30px;
-    height:30px;
-    text-align: center;
-    border-radius: 5px;
+td {
     background-color: var(--cell-color);
-    align-items: center;
-}
-
-.cell:hover {
-    background-color: var(--hover-color);
-    ;
-    transition: 0.4s;
-}
-
-td.mine {
-    background-color: rgb(223, 149, 149);
-    width: 20px;
-    height: auto;
-}
-
-.cell-number {
-    background-color: rgb(74, 102, 126);
-}
-
-td.flagged {
-    background-color: var(--flagged-color);
-    width: 20px;
-    height: auto;
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--hover-color);
+    border-radius: 2px;
 }
 
 .game-board {
     margin: 20px auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    border: none;
-    box-shadow: 0 0 10px rgba(62, 108, 129, 0.445);
-
-    display: grid;
+    background-color: var(--background-color);
+    padding: 10px;
     gap: 2px;
-    grid-template-columns: repeat(4, 30px);
-    background-color: #ddd;
+    box-shadow: 0 0 10px rgba(62, 108, 129, 0.445);
 }
 
-
-/* td {
-    width: 40px;
-    height: 40px;
+.game-board button {
+    /*specific styles for Minesweeper buttons */
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--hover-color);
     text-align: center;
     vertical-align: middle;
-    background-color:var(--cell-color);
-    cursor: pointer;
-    border-radius: 5px;
-    margin: 2px;
-} */
-
-td:hover {
-    background-color: var(--hover-color);
 }
 
-img {
-    max-width: 30px;
-    max-height: 30px;
+.game-board button:hover {
+    /* specific hover effect for Minesweeper buttons */
+    background-color: var(--hover-color);
+    transition: 0.4s;
+}
+
+.game-board td {
+    background-color: var(--cell-color);
+    width: 30px;
+    height: 30px;
+    /* border: 1px solid var(--hover-color); */
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 0 5px rgba(62, 108, 129, 0.233);
+}
+
+
+button {
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--cell-color);
+    text-align: center;
+    vertical-align: middle;
+    box-shadow: 0 0 10px rgba(62, 108, 129, 0.445);
+}
+
+.shown-cell {
+    background-color: #c2f7eb;
+}
+
+.cell.isShown.isMine {
+    background-color: red;
+    color: white;
+}
+
+.cell.isFlagged {
+    font-weight: bold;
+    color: #5c0000;
 }
 
 .timer {
@@ -211,5 +182,5 @@ img {
 }
 
 img {
-    max-height: 30px;
+    max-width: 30px;
 }
