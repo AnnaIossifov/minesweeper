@@ -1,11 +1,18 @@
 body {
     background-color: var(--background-color);
-    width: 700px;
+    width: 750px;
+
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1) inset;
+    border-radius: 8px;
+    padding: 10px;
+
     margin: auto;
+    margin-top: 20px;
     color: var(--text-color);
     font-family: Arial, sans-serif, Helvetica, sans-serif;
     text-align: center;
     font-size: 14px;
+
 }
 
 h1{
@@ -51,6 +58,7 @@ p {
     background-color: var(--background-color);
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1) inset;
     border-radius: 8px;
+    width: 650px;
     padding: 10px;
     align-items: center;
     display: flex;
@@ -97,13 +105,14 @@ td {
 
 .game-board {
     height: 350px;
-    width: 350px;
+    border-radius: 8px;
+    width: 650px;
+    padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 20px auto;
     background-color: var(--background-color);
-    padding: 10px;
     gap: 2px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1) inset, -5px -5px 10px rgba(255, 255, 255, 0.8) inset;
 }
@@ -153,8 +162,12 @@ td.cell-isFlagged {
     background-color: var(--background-color);
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1) inset, -5px -5px 10px rgba(255, 255, 255, 0.8) inset;
     border-radius: 8px;
+    width: 650px;
+    margin: auto;
+    padding: 10px;
     align-items: center;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
 }
 
@@ -178,7 +191,7 @@ img {
 }
 
 .footer {
-    background-color: var(--secondary-color);
+    background-color: var(--background-color);
     text-align: center;
     padding: 10px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1) inset, -5px -5px 10px rgba(255, 255, 255, 0.8) inset;

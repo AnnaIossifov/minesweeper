@@ -113,48 +113,9 @@ function checkGameOver() {
         gGame.correctlyMarkedMines === gLevel.MINES &&
         !gBoard.some(row => row.some(cell => cell.isMine && cell.isShown))
     ) {
-        alert('Congratulations! You won!');
-        resetGame();
+        setTimeout(function () {
+            alert('Congratulations! You won!');
+            resetGame();
+        }, 500)
     }
 }
-
-// function gameOver() {
-//     stopTimer()
-//     resetTimer()
-//     gGame.isOn = false
-//     alert('Game over! You hit a mine!')
-// }
-
-// function resetGame() {
-//     console.log('resetting game.......')
-//     console.log('Step 1: Resetting variables...')
-
-//     gGame.isOn = true
-//     gGame.shownCount = 0
-//     gGame.markedCount = 0
-//     gGame.secsPassed = 0
-//     gGame.correctlyMarkedMines = 0
-//     // gGame.life = 3
-
-//     console.log('stopping the timer')
-    
-//     stopTimer()
-//     resetTimer()
-//     // renderLife()
-
-//     console.log('building new board');
-//     gBoard = buildBoard();
-//     setMines(gBoard);
-//     setMinesNegsCount(gBoard);
-
-//     renderBoard(gBoard);
-// }
-
-// function resetFlagsAndMarks(board) {
-//     for (var i = 0; i < gLevel.SIZE; i++) {
-//         for (var j = 0; j < gLevel.SIZE; j++) {
-//             board[i][j].isMarked = false;
-//             board[i][j].isFlagged = false;
-//         }
-//     }
-// }
