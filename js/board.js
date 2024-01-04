@@ -99,6 +99,7 @@ function onCellClicked(elCell, i, j, event) {
 
         cell.isShown = true
         gGame.shownCount++
+console.log('shownCount',gGame.shownCount)
 
         if (cell.isMine) {
             revealAllMines()
@@ -223,7 +224,7 @@ function expandShown(board, i, j) {
         return;
     }
 
-    board[i][j].isShown = true;
+    board[i][j].isShown = true
     board[i][j].visited = true;
 
     if (board[i][j].minesAroundCount === 0) {
@@ -233,6 +234,7 @@ function expandShown(board, i, j) {
             }
         }
     }
+    
 }
 
 function isValidCell(x, y) {

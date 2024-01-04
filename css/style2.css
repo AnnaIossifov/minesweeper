@@ -15,9 +15,15 @@ body {
 
 }
 
-h1{
-    font-size: 80px;
+h1 {
+    font-size: 4em;
+    padding: 20px;
+    border-radius: 16px;
+    color: var(--background-color);
+    text-shadow: 2px 2px 4px #b0b0b0;
 }
+
+
 h2,
 h3 {
     color: var(--text-color);

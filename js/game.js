@@ -104,15 +104,11 @@ function countMinesAround(board, row, col) {
 
 function checkGameOver() {
     var totalCells = gLevel.SIZE * gLevel.SIZE;
+
     console.log('gGame.shownCount:', gGame.shownCount);
     console.log('gGame.markedCount:', gGame.markedCount);
     console.log('gGame.correctlyMarkedMines:', gGame.correctlyMarkedMines);
-    if (
-        gGame.shownCount === totalCells - gLevel.MINES &&
-        gGame.markedCount === gLevel.MINES &&
-        gGame.correctlyMarkedMines === gLevel.MINES &&
-        !gBoard.some(row => row.some(cell => cell.isMine && cell.isShown))
-    ) {
+    if (gGame.correctlyMarkedMines === gLevel.MINES) {
         setTimeout(function () {
             alert('Congratulations! You won!');
             resetGame();
