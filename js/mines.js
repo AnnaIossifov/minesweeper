@@ -4,21 +4,21 @@ function chooseLevel(level) {
   console.log('choose level:')
   switch (level) {
     case 'beginner':
-      gLevel = { 
-        SIZE: 4, 
-        MINES: 2 
+      gLevel = {
+        SIZE: 4,
+        MINES: 2
       };
       break;
     case 'intermediate':
       gLevel = {
-        SIZE: 8, 
-        MINES: 14 
+        SIZE: 8,
+        MINES: 14
       };
       break;
     case 'expert':
-      gLevel = { 
-        SIZE: 12, 
-        MINES: 32 
+      gLevel = {
+        SIZE: 12,
+        MINES: 32
       };
       break;
     default:
@@ -32,18 +32,24 @@ function chooseLevel(level) {
 
 function setMines(board) {
 
+  for (var i = 0; i < gLevel.SIZE; i++) {
+    for (var j = 0; j < gLevel.SIZE; j++) {
+        board[i][j].isMine = false;
+    }
+}
+
   var minesPlaced = 0;
 
   while (minesPlaced < gLevel.MINES) {
     var randI = Math.floor(Math.random() * gLevel.SIZE);
     var randJ = Math.floor(Math.random() * gLevel.SIZE);
 
-    // Check if the chosen cell already has a mine
+    // 'Check if the chosen cell already has a mine'
     if (!board[randI][randJ].isMine) {
       board[randI][randJ].isMine = true;
       minesPlaced++;
     }
-    // console.log('number of mines:', minesPlaced)
+    console.log('number of mines:', minesPlaced)
   }
   document.querySelector('.minesleft span').innerText = minesPlaced
   console.log('total mines:', minesPlaced)
@@ -68,7 +74,7 @@ function isValidCell(x, y) {
 
 function revealCell(x, y) {
   if (!isValidCell(x, y) || board[x][y].isOpen || gameOver) {
-   console.log('invalid cell');
+    console.log('invalid cell');
     return;
   }
 
@@ -119,12 +125,12 @@ function updateTimer() {
   gStartTime = Date.now();
 
   gIntervalId = setInterval(() => {
-      var elapsed = Math.floor((Date.now() - gStartTime) / 1000);
-      var minutes = Math.floor(elapsed / 60);
-      var seconds = elapsed % 60;
+    var elapsed = Math.floor((Date.now() - gStartTime) / 1000);
+    var minutes = Math.floor(elapsed / 60);
+    var seconds = elapsed % 60;
 
-      elMinutes.innerText = minutes;
-      elSeconds.innerText = seconds;
+    elMinutes.innerText = minutes;
+    elSeconds.innerText = seconds;
   }, 1000);
 }
 

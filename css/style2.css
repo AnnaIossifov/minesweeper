@@ -1,47 +1,31 @@
 body {
     background-color: var(--background-color);
-    color: rgb(49, 75, 92);
+    color: var(--text-color);
     font-family: Arial, sans-serif, Helvetica, sans-serif;
-    margin: center;
     text-align: center;
-    /* display: flex; */
-    justify-content: center;
-    align-items: center;
     font-size: 14px;
 }
 
-h1 {
-    color: rgb(49, 75, 92);
-    font-size: 40px;
-    /* background-color: rgb(191, 231, 236); */
-    padding-top: 40px;
-    padding-bottom: 20px;
-}
-
-h2 {
-    color: rgb(49, 75, 92);
-    font-size: 20px;
-}
-
+h1,
+h2,
 h3 {
-    color: rgb(49, 75, 92);
-    font-size: 12px;
+    color: var(--text-color);
 }
 
 p {
     font-size: 14px;
-    /* margin: 5px auto; */
 }
 
 :root {
     --primary-color: #D8F2DC;
     --secondary-color: #D6D9C1;
     --background-color: #f2f2f2;
-    --cell-color: #c1d9d1;
-    --border-color: #D6D9C1;
-    --hover-color: #aec4bc;
-    --flagged-color: #bedfce;
+    --cell-color: #ffffff;
+    --border-color: #d4e8f4;
+    --hover-color: #daeee6;
+    --flagged-color: #bfe9fd;
     --mine-color: #ffd699;
+    --text-color: rgb(49, 75, 92);
 }
 
 .restart {
@@ -52,20 +36,16 @@ p {
     text-align: center;
     font-size: 20px;
     border-radius: 7px;
-    box-shadow: 0 0 2px rgba(80, 90, 97, 0.816);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px rgba(255, 255, 255, 0.8) inset;
     border: none;
-
-    background: var(--background-color);
-    border-radius: 10px;
-    box-shadow: inset 5px 5px 10px #cee3f2, inset -5px -5px 10px #faffff;
-    box-sizing: border-box;
-    color: #0ea5e9;
+    color: var(--text-color);
+    cursor: pointer;
 }
 
 .level-container {
     margin: 20px auto;
     background-color: var(--background-color);
-    box-shadow: 0 0 5px rgba(80, 90, 97, 0.516);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1) inset;
     border-radius: 8px;
     padding: 10px;
     align-items: center;
@@ -73,15 +53,12 @@ p {
 }
 
 button:not(.restart) {
-
     background: var(--background-color);
     border-radius: 10px;
-    box-shadow: inset 5px 5px 10px #cee3f2, inset -5px -5px 10px #faffff;
-    box-sizing: border-box;
-    color: #0ea5e9;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1) inset, -5px -5px 10px rgba(255, 255, 255, 0.8) inset;
+    color: var(--text-color);
     min-width: 130px;
     min-height: 30px;
-    /* -webkit-mask-image: none; */
     overflow: hidden;
     padding: 1.2rem 2rem;
     position: relative;
@@ -89,16 +66,15 @@ button:not(.restart) {
     transition: 0.2s;
     margin: 10px auto;
     text-align: center;
-    display: block; 
+    display: block;
     width: fit-content;
-
+    cursor: pointer;
 }
 
 button:hover {
     background-color: var(--cell-color);
-    box-shadow: inset 5px 5px 10px #cee3f2, inset -5px -5px 10px #faffff;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1) inset, -5px -5px 10px rgba(255, 255, 255, 0.8) inset;
     transition: 0.4s;
-
 }
 
 table {
@@ -112,10 +88,12 @@ td {
     height: 20px;
     border: 1px solid var(--hover-color);
     border-radius: 2px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1) inset, -5px -5px 10px rgba(255, 255, 255, 0.8) inset;
 }
 
 .game-board {
     height: 350px;
+    width: 350px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -123,21 +101,19 @@ td {
     background-color: var(--background-color);
     padding: 10px;
     gap: 2px;
-    box-shadow: 0 0 10px rgba(62, 108, 129, 0.445);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1) inset, -5px -5px 10px rgba(255, 255, 255, 0.8) inset;
 }
 
 .game-board td:hover {
-    /* specific hover effect for Minesweeper buttons */
     background-color: var(--hover-color);
     transition: 0.4s;
-    box-shadow: inset 5px 5px 10px #cee3f2, inset -5px -5px 10px #faffff
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1) inset, -5px -5px 10px rgba(255, 255, 255, 0.8) inset;
 }
 
 .game-board td {
     -webkit-tap-highlight-color: transparent;
     /* -webkit-appearance: button; */
     line-height: 1.5;
-
     background-color: var(--cell-color);
     width: 20px;
     height: 20px;
@@ -146,7 +122,6 @@ td {
     box-shadow: 0 0 5px rgba(62, 108, 129, 0.233);
 }
 
-
 button {
     width: 30px;
     height: 30px;
@@ -154,6 +129,7 @@ button {
     text-align: center;
     vertical-align: middle;
     box-shadow: 0 0 10px rgba(62, 108, 129, 0.445);
+    cursor: pointer;
 }
 
 td.shown-cell {
@@ -169,47 +145,25 @@ td.cell-isFlagged {
     background: var(--flagged-color);
 }
 
-
 .container {
     background-color: var(--background-color);
-    box-shadow: 0 0 5px rgba(80, 90, 97, 0.507);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1) inset, -5px -5px 10px rgba(255, 255, 255, 0.8) inset;
     border-radius: 8px;
     align-items: center;
     display: flex;
     justify-content: space-between;
 }
 
-.timer {
-    background-color: var(--background-color);
-    box-shadow: 0 0 5px rgba(80, 90, 97, 0.507);
-    padding-bottom: 3px;
-    padding: 3px;
-    margin: auto;
-    width: 100px;
-    height: 50px;
-    border-radius: 8px;
-    text-align: center;
-}
-
-.minesleft {
-    background-color: var(--background-color);
-    box-shadow: 0 0 5px rgba(80, 90, 97, 0.507);
-    padding-bottom: 3px;
-    padding: 3px;
-    margin: 15px auto;
-    width: 100px;
-    height: 50px;
-    border-radius: 8px;
-    text-align: center;
-}
-
+.timer,
+.minesleft,
 .life {
     background-color: var(--background-color);
-    box-shadow: 0 0 5px rgba(80, 90, 97, 0.507);
-    margin: 15px auto;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1) inset, -5px -5px 10px rgba(255, 255, 255, 0.8) inset;
+    padding-bottom: 3px;
     padding: 3px;
+    margin: 15px auto;
     width: 100px;
-    height: 50px;
+    height: 80px;
     border-radius: 8px;
     text-align: center;
 }
@@ -223,4 +177,5 @@ img {
     background-color: var(--secondary-color);
     text-align: center;
     padding: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1) inset, -5px -5px 10px rgba(255, 255, 255, 0.8) inset;
 }

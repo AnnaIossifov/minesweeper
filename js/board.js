@@ -1,16 +1,8 @@
 'use strict'
 
-var gLevel = {
-    SIZE: 4,  //rows and cols
-    MINES: 2
-}
-
-var gBoard = buildBoard()
-const LEFT_MOUSE_BUTTON = 0;
-const RIGHT_MOUSE_BUTTON = 2;
-
 function buildBoard() {
     console.log('hi there')
+    console.log('Initializing gBoard...')
     const board = [];
     for (var i = 0; i < gLevel.SIZE; i++) {
         board[i] = []
@@ -26,6 +18,7 @@ function buildBoard() {
     }
     setMines(board)
     setMinesNegsCount(board)
+    console.log('gBoard after initialization:', board)
     console.table(board)
     return board
 }
@@ -44,11 +37,34 @@ function handleCellClick(event, i, j) {
 
 function onCellClicked(elCell, i, j, event) {
 
-    if (!gGame.isOn || !gBoard[i] || !gBoard[i][j]) {
-        console.log('Game is not active or invalid cell coordinates. Not proceeding.');
+    if (!gGame.isOn) {
+        console.log('Game is not active. Not proceeding.');
         return;
     }
+
+    if (!isValidCell(i, j)) {
+        console.log('Invalid cell coordinates. Not proceeding.');
+        return;
+    }
+    console.log('gBoard:', gBoard)
+    if (!gBoard) {
+        console.log('gBoard is undefined. Not proceeding.');
+        return;
+    }
+
+    console.log('Before if (!gBoard[i]):', i, gBoard)
+    if (!gBoard[i]) {
+        console.log('Row at index', i, 'is undefined. Not proceeding.');
+        return;
+    }
+
     var cell = gBoard[i][j];
+
+    if (!cell) {
+        console.log('Cell at coordinates', i, j, 'is undefined.');
+        return;
+    }
+
     if (cell.isMarked || cell.isShown) {
         console.log('Not proceeding due to cell state');
         return;
@@ -61,10 +77,13 @@ function onCellClicked(elCell, i, j, event) {
 
     // recalculate the board if the first click is mine.
     if (gGame.shownCount === 0 && event.button === LEFT_MOUSE_BUTTON) {
-        console.log('First click!is MINE');
+        console.log('First click! is MINE');
+
+        // Shuffle the mines until a non-mine cell is clicked
         while (gBoard[i][j].isMine) {
-            resetBoard();
+            shuffleMines();
         }
+
         setMinesNegsCount(gBoard);
         renderBoard(gBoard);
     }
@@ -77,18 +96,18 @@ function onCellClicked(elCell, i, j, event) {
 
     // Left mouse button (revealing)
     if (event.button === LEFT_MOUSE_BUTTON && !cell.isMarked && !cell.isShown) {
-        console.log('Left mouse button clicked');
+        console.log('Left mouse button clicked')
 
-        cell.isShown = true;
-        gGame.shownCount++;
+        cell.isShown = true
+        gGame.shownCount++
 
         if (cell.isMine) {
-            revealAllMines();
-            console.log('Game over! You hit a mine!');
-            gameOver();
+            revealAllMines()
+            console.log('Game over! You hit a mine!')
+            gameOver()
         } else if (cell.minesAroundCount === 0) {
-            console.log('Expanding shown cells');
-            expandShown(gBoard, i, j);
+            console.log('Expanding shown cells')
+            expandShown(gBoard, i, j)
         }
     }
 
@@ -98,6 +117,10 @@ function onCellClicked(elCell, i, j, event) {
     renderBoard(gBoard);
 }
 
+function shuffleMines() {
+    resetFlagsAndMarks(gBoard);
+    setMines(gBoard);
+}
 
 function revealAllMines() {
     console.log('Revealing all mines...')
@@ -149,30 +172,45 @@ function revealCell(gameBoard, clickedCell, rowIndex, colIndex, game) {
 }
 
 function onCellMarked(elCell, i, j, event) {
+    if (!gGame.isOn) return
 
-    console.log('onCellMarked triggered')
-    console.log('Mouse button:', event.button)
+    var cell = gBoard[i][j]
 
-    if (!gGame.isOn) return;
+    if (cell.isShown) return
 
-    var i = elCell.parentNode.rowIndex;
-    var j = elCell.cellIndex
-
-    if (gBoard[i][j].isShown) return;
-    console.log('elCell:', elCell)
-    if (!gBoard[i][j].isMarked && !gBoard[i][j].isFlagged) {
-        gBoard[i][j].isMarked = true;
+    if (!cell.isMarked && !cell.isFlagged) {
+        cell.isMarked = true
         elCell.innerHTML = FLAG
-        gGame.markedCount++;
-
-    } else if (gBoard[i][j].isMarked || gBoard[i][j].isFlagged) {
-        gBoard[i][j].isMarked = false;
-        gBoard[i][j].isFlagged = false;
-        elCell.innerHTML = ''; // this Removes the flag emoji
-        gGame.markedCount--;
+        gGame.markedCount++
+        if (cell.isMine) {
+            gGame.correctlyMarkedMines++;
+        }
+    } else if (cell.isMarked || cell.isFlagged) {
+        cell.isMarked = false
+        cell.isFlagged = false
+        elCell.innerHTML = ''
+        gGame.markedCount--
+        if (cell.isMine) {
+            gGame.correctlyMarkedMines--
+        }
     }
-    renderBoard(gBoard)
-    checkGameOver()
+    updateMineCountDisplay();
+
+    renderBoard(gBoard);
+    checkGameOver();
+}
+
+function updateMineCountDisplay() {
+    var minesLeftElement = document.querySelector('.mines-left');
+    if (minesLeftElement) {
+        var minesLeft = gLevel.MINES - gGame.markedCount;
+        minesLeftElement.innerText = minesLeft;
+
+        if (minesLeft === 0 && gGame.shownCount === (gLevel.SIZE * gLevel.SIZE - gLevel.MINES)) {
+            alert('Congratulations! You won!');
+            resetGame();
+        }
+    }
 }
 
 function expandShown(board, i, j) {
@@ -195,7 +233,6 @@ function expandShown(board, i, j) {
 function isValidCell(x, y) {
     return x >= 0 && x < gLevel.SIZE && y >= 0 && y < gLevel.SIZE;
 }
-
 
 function renderBoard(board) {
     var strHTML = '<table><tbody>';
@@ -220,7 +257,7 @@ function renderBoard(board) {
                     if (cell.minesAroundCount === 0) {
                         cellContent = ''
                     } else {
-                        cellContent = cell.minesAroundCount;
+                        cellContent = cell.minesAroundCount.toString();
                     }
                 }
             }
@@ -246,10 +283,22 @@ function renderCell(i, j) {
 }
 
 function checkGameOver() {
-    if (gGame.markedCount === gLevel.MINES && gGame.shownCount === gLevel.SIZE * gLevel.SIZE - gLevel.MINES) {
-        // Game over, player won!
-        alert('Congratulations! You won!')
-        resetGame()
+    var totalCells = gLevel.SIZE * gLevel.SIZE;
+    if (
+        gGame.shownCount === totalCells - gLevel.MINES &&
+        gGame.markedCount === gLevel.MINES &&
+        gGame.correctlyMarkedMines === gLevel.MINES &&
+        !gBoard.some(row => row.some(cell => cell.isMine && cell.isShown))
+    ) {
+        console.log('Victory conditions met. Showing victory alert.');
+        alert('Congratulations! You won!');
+        resetGame();
+    } else {
+        console.log('Not all victory conditions met. Debugging...');
+        console.log('Shown count:', gGame.shownCount);
+        console.log('Marked count:', gGame.markedCount);
+        console.log('Correctly marked mines:', gGame.correctlyMarkedMines);
+        console.log('Any bombs hit:', gBoard.some(row => row.some(cell => cell.isMine && cell.isShown)));
     }
 }
 
@@ -263,17 +312,21 @@ function gameOver() {
 function resetGame() {
     console.log('resetting game.......')
 
+
+    console.log('Step 1: Resetting variables...');
     gGame.isOn = true
     gGame.shownCount = 0
     gGame.markedCount = 0
     gGame.secsPassed = 0
-    gGame.life = 3
-
+    gGame.correctlyMarkedMines = 0
+    // gGame.life = 3
+    console.log('stopping the timer')
     stopTimer()
     resetTimer()
-    renderLife()
-    
+    // renderLife()
+
     // Update the level and rebuild the board
+    console.log('building new board');
     gBoard = buildBoard();
     setMines(gBoard);
     setMinesNegsCount(gBoard);
