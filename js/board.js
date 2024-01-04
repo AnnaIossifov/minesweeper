@@ -70,7 +70,6 @@ function onCellClicked(elCell, i, j, event) {
         return;
     }
 
-    // Start timer
     if (gGame.shownCount === 0) {
         updateTimer();
     }
@@ -104,6 +103,8 @@ function onCellClicked(elCell, i, j, event) {
         if (cell.isMine) {
             revealAllMines()
             console.log('Game over! You hit a mine!')
+            stopTimer()
+            resetTimer()
             gameOver()
         } else if (cell.minesAroundCount === 0) {
             console.log('Expanding shown cells')
@@ -304,7 +305,7 @@ function checkGameOver() {
 
 function gameOver() {
     gGame.isOn = false
-    stopTimer(); // Stop timer
+    stopTimer()
     resetTimer()
     alert('Game over! You hit a mine!')
 }
@@ -325,7 +326,6 @@ function resetGame() {
     resetTimer()
     // renderLife()
 
-    // Update the level and rebuild the board
     console.log('building new board');
     gBoard = buildBoard();
     setMines(gBoard);

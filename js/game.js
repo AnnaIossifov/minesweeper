@@ -43,14 +43,12 @@ var gGame = {
 var gBoard = buildBoard()
 
 function onInit() {
-    gGame.isOn = true  // Reset game state
+    gGame.isOn = true
     gGame.shownCount = 0
     gGame.markedCount = 0
     gGame.secsPassed = 0
-    // stopTimer()
-    // resetTimer()
+    resetTimer()
 
-    // Other initialization code...
     gBoard = buildBoard()
     renderBoard(gBoard)
     setMines(gBoard)
@@ -109,57 +107,54 @@ function checkGameOver() {
     console.log('gGame.shownCount:', gGame.shownCount);
     console.log('gGame.markedCount:', gGame.markedCount);
     console.log('gGame.correctlyMarkedMines:', gGame.correctlyMarkedMines);
-    // Check if all non-mine cells are opened, all mines are flagged, and no bombs are hit
     if (
         gGame.shownCount === totalCells - gLevel.MINES &&
         gGame.markedCount === gLevel.MINES &&
         gGame.correctlyMarkedMines === gLevel.MINES &&
         !gBoard.some(row => row.some(cell => cell.isMine && cell.isShown))
     ) {
-        // The player won!
         alert('Congratulations! You won!');
         resetGame();
     }
 }
 
-function gameOver() {
-    gGame.isOn = false
-    stopTimer(); // Stop timer
-    resetTimer()
-    alert('Game over! You hit a mine!')
-}
+// function gameOver() {
+//     stopTimer()
+//     resetTimer()
+//     gGame.isOn = false
+//     alert('Game over! You hit a mine!')
+// }
 
-function resetGame() {
-    console.log('resetting game.......')
-    console.log('Step 1: Resetting variables...')
+// function resetGame() {
+//     console.log('resetting game.......')
+//     console.log('Step 1: Resetting variables...')
 
-    gGame.isOn = true
-    gGame.shownCount = 0
-    gGame.markedCount = 0
-    gGame.secsPassed = 0
-    gGame.correctlyMarkedMines = 0
-    // gGame.life = 3
+//     gGame.isOn = true
+//     gGame.shownCount = 0
+//     gGame.markedCount = 0
+//     gGame.secsPassed = 0
+//     gGame.correctlyMarkedMines = 0
+//     // gGame.life = 3
 
-    console.log('stopping the timer')
+//     console.log('stopping the timer')
     
-    stopTimer()
-    resetTimer()
-    // renderLife()
+//     stopTimer()
+//     resetTimer()
+//     // renderLife()
 
-    // Update the level and rebuild the board
-    console.log('building new board');
-    gBoard = buildBoard();
-    setMines(gBoard);
-    setMinesNegsCount(gBoard);
+//     console.log('building new board');
+//     gBoard = buildBoard();
+//     setMines(gBoard);
+//     setMinesNegsCount(gBoard);
 
-    renderBoard(gBoard);
-}
+//     renderBoard(gBoard);
+// }
 
-function resetFlagsAndMarks(board) {
-    for (var i = 0; i < gLevel.SIZE; i++) {
-        for (var j = 0; j < gLevel.SIZE; j++) {
-            board[i][j].isMarked = false;
-            board[i][j].isFlagged = false;
-        }
-    }
-}
+// function resetFlagsAndMarks(board) {
+//     for (var i = 0; i < gLevel.SIZE; i++) {
+//         for (var j = 0; j < gLevel.SIZE; j++) {
+//             board[i][j].isMarked = false;
+//             board[i][j].isFlagged = false;
+//         }
+//     }
+// }

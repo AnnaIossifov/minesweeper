@@ -1,12 +1,16 @@
 body {
     background-color: var(--background-color);
+    width: 700px;
+    margin: auto;
     color: var(--text-color);
     font-family: Arial, sans-serif, Helvetica, sans-serif;
     text-align: center;
     font-size: 14px;
 }
 
-h1,
+h1{
+    font-size: 80px;
+}
 h2,
 h3 {
     color: var(--text-color);
